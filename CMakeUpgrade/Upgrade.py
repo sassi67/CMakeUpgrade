@@ -8,7 +8,7 @@ class Upgrade(object):
         self._entryPoint = entryPoint
         self._rootDir = rootDir
         self._fileName = fileName
-        self._listFiles = []
+        #self._listFiles = []
 
     def upgradeFile(self):
         result = False
@@ -27,15 +27,15 @@ class Upgrade(object):
             return result
         
         # look for the files identified by the list 'extensions'
-        self.__getFilesList__(self._rootDir)
-                
+        #self.__getFilesList__(self._rootDir)
+        x = self.__getFilesList__(self._rootDir)       
         
-        with open("results.tx" , 'a') as res:
-            fileListRel = []
-            for f in self._listFiles:
-                s = f.replace(self._rootDir + "\\", "")
-                fileListRel.append(s)
-                res.write(s + '\n')
+        #with open("results.tx" , 'a') as res:
+        #    fileListRel = []
+        #    for f in x:
+        #        s = f.replace(self._rootDir + "\\", "")
+        #        fileListRel.append(s)
+        #        res.write(s + '\n')
                 
             #print(s)
 
@@ -44,20 +44,21 @@ class Upgrade(object):
         return result
 
     def __getFilesList__(self, thisDir):
+        listFiles = []
         for root, dirs, files in os.walk(thisDir):
             for file in files:
                 if self._extensions:
                     for ext in self._extensions:
                         if file.endswith(ext):
-                            tmp = os.path.join(root, file)
-                            if not tmp in self._listFiles:
-                                self._listFiles.append(os.path.join(root, file))
+                            listFiles.append(os.path.join(root, file))
                 else:
                     if file.endswith(".cpp") or file.endswith(".cxx") or file.endswith(".h"):
                         if not root in self._listFiles:
-                            self._listFiles.append(root) 
+                            listFiles.append(root) 
             for dir in dirs:
-                print "Enter directory:", os.path.join(root, dir)
-                self.__getFilesList__(os.path.join(root, dir))  # recursion!!
-
+                #print "Enter directory:", os.path.join(root, dir)
+                listSubDirFiles = self.__getFilesList__(os.path.join(root, dir))  # recursion!!
+                if listSubDirFiles:
+                    listFiles.extend(listSubDirFiles)
+        yield listFiles  
 
