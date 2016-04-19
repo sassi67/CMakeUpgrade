@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ProfilingTarget xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ProjectTarget>
+    <TargetProject>4cc70161-2e26-47b0-90cc-27e9ec788ec7</TargetProject>
+    <FriendlyName>CMakeUpgrade</FriendlyName>
+  </ProjectTarget>
+  <Reports>
+    <Report>
+      <Filename>C:\Users\QtSdk\AppData\Local\Temp\CMakeUpgrade_20160412.vsp</Filename>
+    </Report>
+  </Reports>
+</ProfilingTarget>

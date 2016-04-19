@@ -12,6 +12,9 @@
     <OutputPath>.</OutputPath>
     <Name>CMakeUpgrade</Name>
     <RootNamespace>CMakeUpgrade</RootNamespace>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>C:\Users\QtSdk\Documents\GitHub\CFDEMworkbench\CFDEMWORKBENCH_SRC\src\CFDEMWORKBENCHGUI C:\Users\QtSdk\Documents\GitHub\CFDEMworkbench\CFDEMWORKBENCH_SRC\src\CFDEMWORKBENCHGUI\CMakeLists.txt</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +26,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CMakeUpgrade.py" />
+    <Compile Include="Upgrade.py" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
