@@ -2,37 +2,38 @@ from sys import argv, exit
 from Upgrade import Upgrade
 import os 
 
-import abc
-class Interface():
-    """Base class for common operations"""
-    __metaclass__ = abc.ABCMeta
+#import abc
+#class Interface():
+#    """Base class for common operations"""
+#    __metaclass__ = abc.ABCMeta
 
-    @abc.abstractmethod
-    def f(self):
-         pass
+#    @abc.abstractmethod
+#    def f(self):
+#         pass
 
-class Impl(Interface):
-    def __init__(self, *args, **kwargs):
-        return super(Impl, self).__init__(*args, **kwargs)
-    def f(self):
-        print "Im am an implementation"
-        return super(Impl, self).f() 
-    def g(self):
-        print "I'm g"
+#class Impl(Interface):
+#    def __init__(self, *args, **kwargs):
+#        return super(Impl, self).__init__(*args, **kwargs)
+#    def f(self):
+#        print "Im am an implementation"
+#        return super(Impl, self).f() 
+#    def g(self):
+#        print "I'm g"
          
-obj = Impl()
-obj.g()
+#obj = Impl()
+#obj.g()
 
-#if len(argv) < 3:
-#    exit(1)
+if len(argv) < 3:
+    exit(1)
 
-#x, rootDir, cMakeFile = argv
+x, rootDir, cMakeFile = argv
 
-#for dirpath, dirs, files in os.walk(rootDir):	 
-#	path = dirpath.split('/')
-#	print '|', (len(path))*'---', '[',os.path.basename(dirpath),']'
-#	for f in files:
-#		print '|', len(path)*'---', f
+for dirpath, dirs, files in os.walk(rootDir):	 
+    path = dirpath.split('\\')
+    print '|', (len(path))*'---', '[',os.path.basename(dirpath),']'
+    for f in files:
+        if f.endswith(".cpp") or f.endswith(".cxx") or f.endswith(".h"):
+            print '|', len(path)*'---', f
 
 #fileList = []
 #for root, dirs, files in os.walk(root_directory):
@@ -50,5 +51,4 @@ obj.g()
 #tupleUpg = (cppUpg, hUpg, dirUpg)
 #for obj in tupleUpg:
 #    obj.upgradeFile()
-        
 #dirUpg.upgradeFile()
