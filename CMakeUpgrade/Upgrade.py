@@ -1,64 +1,21 @@
 import os
-from sys import exit
+from UpgradeInterface import UpgradeInterface
 
-class Upgrade(object):
-    """ constructor """
+class Upgrade(UpgradeInterface):
+    """Upgrade of .cpp and .cxx files"""
     def __init__(self, extensions, entryPoint, rootDir, fileName):
-        self._extensions = extensions # a list
-        self._entryPoint = entryPoint
-        self._rootDir = rootDir
-        self._fileName = fileName
-        #self._listFiles = []
+        return super(Upgrade, self).__init__(extensions, entryPoint, rootDir, fileName)
 
     def upgradeFile(self):
         result = False
-        # check the type of the arguments
-        if not isinstance(self._extensions, list):
-            print "extensions is NOT a dictionary"
-            return result
-        if not isinstance(self._entryPoint, basestring):
-            print "entry point is NOT a string"
-            return result
-        if not isinstance(self._rootDir, basestring):
-            print "root dir is NOT a string"
-            return result
-        if not isinstance(self._fileName, basestring):
-            print "filename is NOT a string"
-            return result
+
+        for dirpath, dirs, files in os.walk(self._rootDir):	 
+            for f in files:
+                for ext in self._extensions:
+                    if f.endswith(ext):
+                        s = os.path.join(dirpath, f)
+                        s = s[len(self._rootDir) + 1:]
+                        self._listFiles.append(s)
         
-        # look for the files identified by the list 'extensions'
-        #self.__getFilesList__(self._rootDir)
-        x = self.__getFilesList__(self._rootDir)       
-        
-        #with open("results.tx" , 'a') as res:
-        #    fileListRel = []
-        #    for f in x:
-        #        s = f.replace(self._rootDir + "\\", "")
-        #        fileListRel.append(s)
-        #        res.write(s + '\n')
-                
-            #print(s)
-
-        #with open(self._fileName, 'r') as f:
-
-        return result
-
-    def __getFilesList__(self, thisDir):
-        listFiles = []
-        for root, dirs, files in os.walk(thisDir):
-            for file in files:
-                if self._extensions:
-                    for ext in self._extensions:
-                        if file.endswith(ext):
-                            listFiles.append(os.path.join(root, file))
-                else:
-                    if file.endswith(".cpp") or file.endswith(".cxx") or file.endswith(".h"):
-                        if not root in self._listFiles:
-                            listFiles.append(root) 
-            for dir in dirs:
-                #print "Enter directory:", os.path.join(root, dir)
-                listSubDirFiles = self.__getFilesList__(os.path.join(root, dir))  # recursion!!
-                if listSubDirFiles:
-                    listFiles.extend(listSubDirFiles)
-        yield listFiles  
-
+        result = True
+        return result #super(UpgradeCPP, self).upgradeFile()

@@ -26,7 +26,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CMakeUpgrade.py" />
-    <Compile Include="Upgrade.py" />
+    <Compile Include="Upgrade.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="UpgradeInterface.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
