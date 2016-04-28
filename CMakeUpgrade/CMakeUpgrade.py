@@ -7,8 +7,9 @@ if len(argv) < 3:
 
 x, rootDir, cMakeFile = argv
 cppUpg = Upgrade([".cpp", ".cxx"], "SET(_other_SOURCES", rootDir, cMakeFile)
+cppH1 = Upgrade([".h"], "SET(_moc_HEADERS", rootDir, cMakeFile, os.path.join(rootDir, "include"))
 
-tupleUpg = (cppUpg,)
+tupleUpg = (cppUpg,cppH1)
 for obj in tupleUpg:
     obj.upgradeFile()
     obj.showList()

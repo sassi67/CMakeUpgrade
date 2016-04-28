@@ -7,11 +7,12 @@ class UpgradeInterface(object):
     """Base class for common operation of upgrade"""
     __metaclass__ = abc.ABCMeta
 
-    def __init__(self, extensions, entryPoint, rootDir, fileName):
+    def __init__(self, extensions, entryPoint, rootDir, fileName, excludeDir = ""):
         self._extensions = extensions # a list
         self._entryPoint = entryPoint
         self._rootDir = rootDir
         self._fileName = fileName
+        self._excludeDir = excludeDir
         self._listFiles = []
         # check the type of the arguments
         if not isinstance(self._extensions, list):
@@ -25,6 +26,9 @@ class UpgradeInterface(object):
             exit(1)
         if not isinstance(self._fileName, basestring):
             print "filename is NOT a string"
+            exit(1)
+        if not isinstance(self._excludeDir, basestring):
+            print "excludedir is NOT a string"
             exit(1)
     
     @abc.abstractmethod
